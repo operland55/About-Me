@@ -20,35 +20,35 @@
   </header>
   <section class="scroll-content">
     <div class="scroll-graphic">
-      <div class="graphic-item visible">
-        <img class="scene-img" src="인사.gif" alt="">
+      <div class="graphic-item">
+        <img class="scene-img" src="인사.gif" alt="about Me img">
       </div>
       <div class="graphic-item">
-        <img class="scene-img" src="자기소개1.png" alt="">
+        <img class="scene-img" src="자기소개1.png" alt="about Me img">
       </div>
-      <div class=" graphic-item">
-        <img class="scene-img" src="자기소개2.png" alt="">
+      <div class="graphic-item">
+        <img class="scene-img" src="자기소개2.png" alt="about Me img">
       </div>
-      <div class=" graphic-item">
-        <img class="scene-img" src="자기소개3.png" alt="">
+      <div class="graphic-item">
+        <img class="scene-img" src="자기소개3.png" alt="about Me img">
       </div>
-      <div class=" graphic-item">
-        <img class="scene-img" src="자기소개4.png" alt="">
+      <div class="graphic-item">
+        <img class="scene-img" src="자기소개4.png" alt="about Me img">
       </div>
-      <div class=" graphic-item">
-        <img class="scene-img" src="자기소개5.png" alt="">
+      <div class="graphic-item">
+        <img class="scene-img" src="자기소개5.png" alt="about Me img">
       </div>
-      <div class=" graphic-item">
-        <img class="scene-img" src="자기소개6.png" alt="">
+      <div class="graphic-item">
+        <img class="scene-img" src="자기소개6.png" alt="about Me img">
       </div>
-      <div class=" graphic-item">
-        <img class="scene-img" src="자기소개5.png" alt="">
+      <div class="graphic-item" data-action="HelloWorld">
+        <img class="scene-img" src="자기소개7.png" alt="about Me img">
+        <img class="Hello-img" src="Hello.png" alt="Hello img">
       </div>
-      <div class=" graphic-item">
-        <img class="scene-img" src="자기소개1.png" alt="">
+      <div class="graphic-item">
+        <img class="scene-img" src="인사.gif" alt="about Me img">
       </div>
     </div>
-
 
     <div class=" scroll-text global-width">
       <div class="step">
@@ -77,13 +77,10 @@
       <div class="step">
         <p>
           경찰 시험은 1년간 도전하였지만 떨어지게되어 실망한 상태였지만 가족들이 일본여행을 가자하여서 오사카를 가게되었습니다.
-        </p>
-      </div>
-      <div class="step">
-        <p>
           3박4일간 일본을 여행했는데 정말 저에게 좋은 추억과 좋은 분위기에 매료되어서 한국에 돌아오자마자 바로 유학준비를 하였습니다
         </p>
       </div>
+
       <div class="step">
         <p>
           그렇게 저는 2018년1월에 일본에 가서 1년 3개월간 일본어를 배우고 시부야에있는 한국식당에서 요리를 하고 일본 홈쇼핑몰에서 재고 정리 아르바이트를 하였습니다
@@ -99,6 +96,11 @@
           시간이 흘러 백화점에 계속일을하였는데 우연히 youtube로 프론트엔드에 대한 영상을보고 관심을 가지게되었습니다
         </p>
       </div>
+      <div class="step">
+        <p>
+          이렇게
+        </p>
+      </div>
 
     </div>
   </section>
@@ -106,56 +108,66 @@
 
   <script>
     (() => {
-      const stepElems = document.querySelectorAll(".step");
-      const graphicElems = document.querySelectorAll(".graphic-item");
-      let currentItem = graphicElems[0]; //현재 활성화된(visible 클래스가 붙은) .graphic-item을 지정
-      let ioIndex;
+      (() => {
+        const stepElems = document.querySelectorAll('.step');
+        const graphicElems = document.querySelectorAll('.graphic-item');
+        let currentItem = graphicElems[0] //현재 활성화된(visible 클래스가 붙은) .graphic-item을 지정 
+        let ioIndex;
 
-      const io = new IntersectionObserver((entries, observer) => {
-        ioIndex = entries[0].target.dataset.index * 1;
-      });
 
-      for (let i = 0; i < stepElems.length; i++) {
-        io.observe(stepElems[i]);
-        stepElems[i].dataset.index = i; //text
-        graphicElems[i].dataset.index = i; // 이미지
-      }
+        const io = new IntersectionObserver((entries, observer) => {
+          ioIndex = entries[0].target.dataset.index * 1;
+        })
 
-      function activate(action) {
-        currentItem.classList.add("visible");
-      }
-
-      function inactivate(action) {
-        currentItem.classList.remove("visible");
-      }
-
-      window.addEventListener("scroll", () => {
-        let step;
-        let boundingRect;
-
-        // for (let i = 0; i < stepElems.length; i++) {
-        for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
-          step = stepElems[i];
-          if (!step) continue; //만약에 step 에 값이없으면 다음턴으로가주세요
-          boundingRect = step.getBoundingClientRect();
-
-          if (
-            boundingRect.top > window.innerHeight * 0.1 &&
-            boundingRect.top < window.innerHeight * 0.8
-          ) {
-            if (currentItem) {
-              inactivate();
-            }
-            currentItem = graphicElems[step.dataset.index];
-            activate(currentItem.dataset.action); //이름가져오기
-          }
+        for (let i = 0; i < stepElems.length; i++) {
+          io.observe(stepElems[i]);
+          stepElems[i].dataset.index = i;   //text
+          graphicElems[i].dataset.index = i; // 이미지 
         }
-      });
+        console.log(io.observe(stepElems[0]))
+        function activate(action) { //활성화
+          currentItem.classList.add('visible');
+        }
 
-      window.addEventListener("load", () => {
-        setTimeout(() => scrollTo(0, 0), 100);
-      });
-      activate();
+
+
+        function inactivate(action) { //비활성화
+          currentItem.classList.remove('visible');
+        }
+
+
+        window.addEventListener('scroll', () => {
+          let step;
+          let boundingRect;
+
+
+          for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
+            step = stepElems[i];
+            if (!step) continue; //만약에 step 에 값이없으면 다음턴으로가주세요
+            boundingRect = step.getBoundingClientRect();
+
+
+            if (boundingRect.top > window.innerHeight * 0.1 &&
+              boundingRect.top < window.innerHeight * 0.8) {
+
+              if (currentItem) {
+                inactivate();
+              }
+              currentItem = graphicElems[step.dataset.index];
+              activate(currentItem.dataset.action); //이름가져오기
+            }
+
+          }
+        })
+
+        window.addEventListener('load', () => {
+          setTimeout(() => scrollTo(0, 0), 100);
+        })
+        activate();
+
+
+      })();
+
     })();
 
 

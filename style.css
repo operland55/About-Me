@@ -71,17 +71,24 @@ img {
 	border-radius: 10px;
 	background: rgba(255, 255, 255, 0.8);
 }
-.bird {
+.Hello-img {
 	position: absolute;
 	left: 0;
-	bottom: 70%;
+	bottom: 50%;
 	width: 100px;
+	height: auto;
 	transform: translateY(-100%);
 	transition: 1.5s 0.5s linear;
+	animation: move 10000ms ease-in;
+	animation-fill-mode: forwards;
 }
-[data-index="5"] .bird {
-	left: 30%;
-	bottom: 30%;
+@keyframes move {
+	0% {
+		left: 0;
+	}
+	100% {
+		left: 78%;
+	}
 }
 .global-footer {
 	padding: 2rem 0;
