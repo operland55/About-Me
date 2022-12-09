@@ -14,7 +14,7 @@
     <div class="global-width">
       <h1 class="page-title">정윤재의 소개서</h1>
       <p>
-        저의 대해 어떤식으로 설명하면 좋을지 고민하다가 만화처럼 나에대해서 설명해주고 그리고 html css JS 기능에대해 이해도도 보여주고싶어서 이렇게 자기소개서 사이트를 만들어보았습니다
+        저의 대해 어떤식으로 설명하면 좋을지 고민하다가 만화처럼 나에대해서 설명해주고 그리고 html css JS 기능에대해 간단하게라도 보여주고싶어서 이렇게 자기소개서 사이트를 만들어보았습니다
       </p>
     </div>
   </header>
@@ -76,7 +76,7 @@
       </div>
       <div class="step">
         <p>
-          경찰 시험은 1년간 도전하였지만 떨어지게되어 실망한 상태였지만 가족들이 일본여행을 가자하여서 오사카를 가게되었습니다.
+          경찰 시험은 1년간 도전하였지만 떨어지게되어 실망한 상태였지만 시험이 끝난후 가족들과 일본에 있는 오사카를 가게되었습니다.
           3박4일간 일본을 여행했는데 정말 저에게 좋은 추억과 좋은 분위기에 매료되어서 한국에 돌아오자마자 바로 유학준비를 하였습니다
         </p>
       </div>
@@ -93,12 +93,14 @@
       </div>
       <div class="step">
         <p>
-          시간이 흘러 백화점에 계속일을하였는데 우연히 youtube로 프론트엔드에 대한 영상을보고 관심을 가지게되었습니다
+          시간이 흘러 백화점에 계속일을하였는데 우연히 youtube로 프론트엔드에 대한 영상을보고 관심을 가지게되어 html부터 css js react까지 공부를하였습니다
         </p>
       </div>
       <div class="step">
         <p>
-          이렇게
+          네 이상으로 저의 소개를 마치겠습니다.<br>
+          아무래도 그림의 소질이없어서 이렇게 급하게 마칩니다.<br>
+          많이 부족하지만 누구보다 열정적이고 유행에 뒤쳐지지않는 개발자가 되겠습니다.
         </p>
       </div>
 
@@ -106,73 +108,7 @@
   </section>
 
 
-  <script>
-    (() => {
-      (() => {
-        const stepElems = document.querySelectorAll('.step');
-        const graphicElems = document.querySelectorAll('.graphic-item');
-        let currentItem = graphicElems[0] //현재 활성화된(visible 클래스가 붙은) .graphic-item을 지정 
-        let ioIndex;
-
-
-        const io = new IntersectionObserver((entries, observer) => {
-          ioIndex = entries[0].target.dataset.index * 1;
-        })
-
-        for (let i = 0; i < stepElems.length; i++) {
-          io.observe(stepElems[i]);
-          stepElems[i].dataset.index = i;   //text
-          graphicElems[i].dataset.index = i; // 이미지 
-        }
-        console.log(io.observe(stepElems[0]))
-        function activate(action) { //활성화
-          currentItem.classList.add('visible');
-        }
-
-
-
-        function inactivate(action) { //비활성화
-          currentItem.classList.remove('visible');
-        }
-
-
-        window.addEventListener('scroll', () => {
-          let step;
-          let boundingRect;
-
-
-          for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
-            step = stepElems[i];
-            if (!step) continue; //만약에 step 에 값이없으면 다음턴으로가주세요
-            boundingRect = step.getBoundingClientRect();
-
-
-            if (boundingRect.top > window.innerHeight * 0.1 &&
-              boundingRect.top < window.innerHeight * 0.8) {
-
-              if (currentItem) {
-                inactivate();
-              }
-              currentItem = graphicElems[step.dataset.index];
-              activate(currentItem.dataset.action); //이름가져오기
-            }
-
-          }
-        })
-
-        window.addEventListener('load', () => {
-          setTimeout(() => scrollTo(0, 0), 100);
-        })
-        activate();
-
-
-      })();
-
-    })();
-
-
-  </script>
-
+  <script src="/main.js"></script>
 </body>
 
 
